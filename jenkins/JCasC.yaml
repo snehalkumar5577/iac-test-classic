@@ -1,0 +1,28 @@
+controller:
+  JCasC:
+    configScripts:
+      jenkins-url: |
+        unclassified:
+          location:
+            url: http://${SERVER_IP}/jenkins
+          globalDefaultFlowDurabilityLevel:
+            durabilityHint: PERFORMANCE_OPTIMIZED
+          buildDiscarders:
+            configuredBuildDiscarders:
+            - "jobBuildDiscarder"
+            - simpleBuildDiscarder:
+                discarder:
+                  logRotator:
+                    daysToKeepStr: "5"
+                    numToKeepStr: "5"
+          globalLibraries:
+            libraries:
+            - includeInChangesets: false
+              name: "library"
+              retriever:
+                modernSCM:
+                  scm:
+                    git:
+                      remote: "git@bitbucket.org:svmahale/jenkins-library.git"
+                      traits:
+                      - "gitBranchDiscovery"
